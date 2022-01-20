@@ -8,15 +8,13 @@ const content = request(url, (error, response, body) => {
   if (error) {
     console.log('error:', error);
     console.log('statusCode:', response && response.statusCode);
-  }
-  console.log('body: ', body)
-  return body;
-})
-
-fs.writeFile(fileLocation, content, err => {
-  if (err) {
-    console.log(err)
     return;
   }
+  fs.writeFile(fileLocation, body, err => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(`Downloaded and saved ${body.length} bytes to ${fileLocation}`)
+    }
+  })
 })
-
